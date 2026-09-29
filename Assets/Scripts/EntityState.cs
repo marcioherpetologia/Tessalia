@@ -3,10 +3,12 @@ using UnityEngine;
 public class EntityState
 {
     protected StateMachine stateMachine;
+    protected string stateName;
 
-    public EntityState(StateMachine stateMachine) // Construtor: método especial no qual será chamado quando criarmos instancias dessa classe
+    public EntityState(StateMachine stateMachine, string stateName) // Construtor: método especial no qual será chamado quando criarmos instancias dessa classe
     {
         this.stateMachine = stateMachine;
+        this.stateName = stateName;
     }
 
     public virtual void Update() // Fazer o override no Player

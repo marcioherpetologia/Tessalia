@@ -9,4 +9,11 @@ public class StateMachine // Classe que será a referência para o state atual
         currentState = startState;
         currentState.Enter();
     }
+    
+    public void ChangeState(EntityState newState)
+    {
+        currentState.Exit();
+        currentState = newState;
+        currentState.Enter();
+    }
 }
