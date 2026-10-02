@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Animator anim { get; private set; }
+    
     private PlayerInputSet input;
     private StateMachine stateMachine;
     
@@ -13,12 +15,14 @@ public class Player : MonoBehaviour
     
     private void Awake()
     {
+        anim = GetComponentInChildren<Animator>();
+        
         stateMachine = new StateMachine();
         
         input = new PlayerInputSet();
 
-        idleState = new PlayerIdleState(this, stateMachine, "Idle");
-        moveState = new PlayerMoveState(this, stateMachine, "Move");
+        idleState = new PlayerIdleState(this, stateMachine, "idle");
+        moveState = new PlayerMoveState(this, stateMachine, "move");
     }
 
     private void OnEnable()
@@ -41,6 +45,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        stateMachine.currentState.Update();
+        stateMachine.UpdateActiveState();
     }
 }

@@ -16,4 +16,9 @@ public class StateMachine // Classe que será a referência para o state atual
         currentState = newState;
         currentState.Enter();
     }
+
+    public void UpdateActiveState()
+    {
+        currentState.Update();
+    }
 }

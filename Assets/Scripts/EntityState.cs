@@ -4,13 +4,17 @@ public abstract class EntityState
 {
     protected Player player;
     protected StateMachine stateMachine;
-    protected string stateName;
+    protected string animBoolName;
 
-    public EntityState(Player player, StateMachine stateMachine, string stateName) // Construtor: método especial no qual será chamado quando criarmos instancias dessa classe
+    protected Animator anim;
+
+    public EntityState(Player player, StateMachine stateMachine, string animBoolName) // Construtor: método especial no qual será chamado quando criarmos instancias dessa classe
     {
         this.player = player;
         this.stateMachine = stateMachine;
-        this.stateName = stateName;
+        this.animBoolName = animBoolName;
+        
+        anim = player.anim;
     }
 
     public virtual void Update() // Fazer o override no Player
@@ -20,11 +24,11 @@ public abstract class EntityState
 
     public virtual void Enter() // Chamado todas as vezes que precisar entrar em novo state
     {
-        
+        anim.SetBool(animBoolName, true);
     }
 
     public virtual void Exit() // Chamado todas as vezes que precisar sair de novo state
     {
-        
+        anim.SetBool(animBoolName, false);
     }
 }
