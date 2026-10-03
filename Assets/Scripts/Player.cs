@@ -4,6 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Animator anim { get; private set; }
+    public Rigidbody2D rb { get; private set; }
     
     private PlayerInputSet input;
     private StateMachine stateMachine;
@@ -13,8 +14,14 @@ public class Player : MonoBehaviour
 
     public Vector2 moveInput { get; private set; }
     
+    [Header("Move Details")]
+    public float moveSpeed;
+    
+    private bool facingRight = true;
+    
     private void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
         
         stateMachine = new StateMachine();
@@ -46,5 +53,25 @@ public class Player : MonoBehaviour
     private void Update()
     {
         stateMachine.UpdateActiveState();
+    }
+
+    public void SetVelocity(float xVelocity, float yVelocity)
+    {
+        rb.linearVelocity = new Vector2(xVelocity, yVelocity);
+        HandleFlip(xVelocity);
+    }
+
+    private void HandleFlip(float xVelocity)
+    {
+        if(xVelocity > 0 && !facingRight) // Ex. personagem virada para a esquerda, o input for pressionado para ir para a direita (linerVelocity é positivo agora) e ainda estiver virado para a esquerda, flipar 
+            Flip();
+        else if(xVelocity < 0 && facingRight)
+            Flip();
+    }
+
+    private void Flip()
+    {
+        transform.Rotate(0f, 180f, 0f);
+        facingRight = !facingRight;
     }
 }
