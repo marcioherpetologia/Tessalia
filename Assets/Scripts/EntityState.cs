@@ -8,6 +8,7 @@ public abstract class EntityState
 
     protected Animator anim;
     protected Rigidbody2D rb;
+    protected PlayerInputSet input;
 
     public EntityState(Player player, StateMachine stateMachine, string animBoolName) // Construtor: método especial no qual será chamado quando criarmos instancias dessa classe
     {
@@ -17,6 +18,7 @@ public abstract class EntityState
         
         anim = player.anim;
         rb = player.rb;
+        input = player.input;
     }
 
     public virtual void Update() // Fazer o override no Player

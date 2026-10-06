@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
     
-    private PlayerInputSet input;
+    public PlayerInputSet input { get; private set;}
     private StateMachine stateMachine;
     
     public PlayerIdleState idleState { get; private set; }
@@ -25,7 +25,6 @@ public class Player : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         
         stateMachine = new StateMachine();
-        
         input = new PlayerInputSet();
 
         idleState = new PlayerIdleState(this, stateMachine, "idle");
@@ -36,8 +35,9 @@ public class Player : MonoBehaviour
     {
         input.Enable();
 
-        input.Player.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>(); //input, action map, action , momento que o input é reconhecido pelo jogo
+        input.Player.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>(); //input, action map, action , momento que o input é reconhecido pelo jogo. O ctx é uma abreviação para context (ou InputAction.CallbackContext). Ele é o parâmetro de uma função callback enviada pelo Unity Input System sempre que uma ação acontece (como apertar ou soltar um botão).
         input.Player.Movement.canceled += ctx => moveInput = Vector2.zero; // Quando o jogador soltar os botões de movimento, zere o vetor de movimento.
+
     }
 
     private void OnDisable()

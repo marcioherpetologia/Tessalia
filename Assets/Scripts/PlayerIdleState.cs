@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerIdleState : EntityState
+public class PlayerIdleState : PlayerGroundedState
 {
     public PlayerIdleState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
@@ -13,6 +13,7 @@ public class PlayerIdleState : EntityState
 
         if (player.moveInput.x != 0)
             stateMachine.ChangeState(player.moveState);
+    
     }
     
     
