@@ -11,11 +11,14 @@ public class Player : MonoBehaviour
     
     public PlayerIdleState idleState { get; private set; }
     public PlayerMoveState moveState  { get; private set; }
+    public PlayerJumpState jumpState  { get; private set; }
+    public PlayerFallState fallState  { get; private set; }
 
     public Vector2 moveInput { get; private set; }
     
     [Header("Move Details")]
     public float moveSpeed;
+    public float jumpForce;
     
     private bool facingRight = true;
     
@@ -29,6 +32,8 @@ public class Player : MonoBehaviour
 
         idleState = new PlayerIdleState(this, stateMachine, "idle");
         moveState = new PlayerMoveState(this, stateMachine, "move");
+        jumpState = new PlayerJumpState(this, stateMachine, "jumpFall");
+        fallState = new PlayerFallState(this, stateMachine, "jumpFall");
     }
 
     private void OnEnable()
@@ -52,6 +57,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        
         stateMachine.UpdateActiveState();
     }
 

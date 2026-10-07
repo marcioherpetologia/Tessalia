@@ -10,7 +10,7 @@ public class PlayerGroundedState : EntityState // Esta classe ser√° uma combina√
     {
         if (input.Player.Jump.WasPerformedThisFrame())
         {
-            Debug.Log("Jumping");
+            stateMachine.ChangeState(player.jumpState);
         }
         
     }

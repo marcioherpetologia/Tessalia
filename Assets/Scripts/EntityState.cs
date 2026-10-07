@@ -23,7 +23,7 @@ public abstract class EntityState
 
     public virtual void Update() // Fazer o override no Player
     {
-        
+        anim.SetFloat("yVelocity", rb.linearVelocity.y);
     }
 
     public virtual void Enter() // Chamado todas as vezes que precisar entrar em novo state

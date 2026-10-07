@@ -486,6 +486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   moveSpeed: 6
+  jumpForce: 5
 --- !u!4 &724192985
 Transform:
   m_ObjectHideFlags: 0
