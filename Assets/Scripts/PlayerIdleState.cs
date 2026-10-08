@@ -7,6 +7,13 @@ public class PlayerIdleState : PlayerGroundedState
     {
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+        
+        player.SetVelocity(0, rb.linearVelocity.y);
+    }
+
     override public void Update()
     {
         base.Update();
@@ -15,6 +22,5 @@ public class PlayerIdleState : PlayerGroundedState
             stateMachine.ChangeState(player.moveState);
     
     }
-    
     
 }
