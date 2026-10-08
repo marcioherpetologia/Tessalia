@@ -8,10 +8,10 @@ public class PlayerGroundedState : EntityState // Esta classe ser√° uma combina√
 
     public override void Update()
     {
-        if (input.Player.Jump.WasPerformedThisFrame())
-        {
-            stateMachine.ChangeState(player.jumpState);
-        }
+        if(rb.linearVelocity.y < 0)
+            stateMachine.ChangeState(player.fallState);
         
+        if (input.Player.Jump.WasPerformedThisFrame()) 
+            stateMachine.ChangeState(player.jumpState);
     }
 }
