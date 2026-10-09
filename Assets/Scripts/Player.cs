@@ -13,13 +13,16 @@ public class Player : MonoBehaviour
     public PlayerMoveState moveState  { get; private set; }
     public PlayerJumpState jumpState  { get; private set; }
     public PlayerFallState fallState  { get; private set; }
+    public PlayerWallSlideState wallSlideState  { get; private set; }
 
     public Vector2 moveInput { get; private set; }
     
     [Header("Collision Detection")]
+    [SerializeField] private float wallCheckDistance;
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private LayerMask whatIsGround;
     public bool groundDetected { get; private set; }
+    public bool wallDetected { get; private set; }
     
     
     [Header("Move Details")]
@@ -27,6 +30,7 @@ public class Player : MonoBehaviour
     public float jumpForce;
     [Range(0, 1)] public float inAirMoveMultiplier = .7f;
     private bool facingRight = true;
+    private int facingDir = 1;
     
     private void Awake()
     {
@@ -40,6 +44,7 @@ public class Player : MonoBehaviour
         moveState = new PlayerMoveState(this, stateMachine, "move");
         jumpState = new PlayerJumpState(this, stateMachine, "jumpFall");
         fallState = new PlayerFallState(this, stateMachine, "jumpFall");
+        wallSlideState = new PlayerWallSlideState(this, stateMachine, "wallSlide");
     }
 
     private void OnEnable()
@@ -85,16 +90,19 @@ public class Player : MonoBehaviour
     {
         transform.Rotate(0f, 180f, 0f);
         facingRight = !facingRight;
+        facingDir *= -1;
     }
 
     private void HandleCollisionDetection()
     {
         groundDetected = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
+        wallDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, -groundCheckDistance));
+        Gizmos.DrawLine(transform.position, transform.position + new Vector3(wallCheckDistance * facingDir, 0));
     }
 }
