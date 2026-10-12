@@ -623,14 +623,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fade239398b4da84eab8437da231d4f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  wallCheckDistance: 0.5
+  wallCheckDistance: 0.4
   groundCheckDistance: 1.35
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   moveSpeed: 7
   jumpForce: 12
-  inAirMoveMultiplier: 0.909
+  wallSlideSlowMultiplier: 0.5
+  inAirMoveMultiplier: 0.9
 --- !u!4 &724192985
 Transform:
   m_ObjectHideFlags: 0

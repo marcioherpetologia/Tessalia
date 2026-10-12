@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     [Header("Move Details")]
     public float moveSpeed;
     public float jumpForce;
+    [Range(0, 1)] public float wallSlideSlowMultiplier = .5f;
     [Range(0, 1)] public float inAirMoveMultiplier = .7f;
     private bool facingRight = true;
     private int facingDir = 1;
@@ -86,7 +87,7 @@ public class Player : MonoBehaviour
             Flip();
     }
 
-    private void Flip()
+    public void Flip()
     {
         transform.Rotate(0f, 180f, 0f);
         facingRight = !facingRight;
