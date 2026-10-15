@@ -10,6 +10,8 @@ public abstract class EntityState
     protected Rigidbody2D rb;
     protected PlayerInputSet input;
 
+    protected float stateTimer;
+
     public EntityState(Player player, StateMachine stateMachine, string animBoolName) // Construtor: método especial no qual será chamado quando criarmos instancias dessa classe
     {
         this.player = player;
@@ -23,7 +25,11 @@ public abstract class EntityState
 
     public virtual void Update() // Fazer o override no Player
     {
+        stateTimer -=  Time.deltaTime;
         anim.SetFloat("yVelocity", rb.linearVelocity.y);
+        
+        if(input.Player.Dash.WasPressedThisFrame())
+            stateMachine.ChangeState(player.dashState);
     }
 
     public virtual void Enter() // Chamado todas as vezes que precisar entrar em novo state

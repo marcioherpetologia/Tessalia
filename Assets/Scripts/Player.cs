@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public PlayerFallState fallState  { get; private set; }
     public PlayerWallSlideState wallSlideState  { get; private set; }
     public PlayerWallJumpState wallJumpState  { get; private set; }
+    public PlayerDashState dashState  { get; private set; }
     
 
     public Vector2 moveInput { get; private set; }
@@ -51,6 +52,7 @@ public class Player : MonoBehaviour
         fallState = new PlayerFallState(this, stateMachine, "jumpFall");
         wallSlideState = new PlayerWallSlideState(this, stateMachine, "wallSlide");
         wallJumpState = new PlayerWallJumpState(this, stateMachine, "jumpFall");
+        dashState = new PlayerDashState(this, stateMachine, "dash");
     }
 
     private void OnEnable()
