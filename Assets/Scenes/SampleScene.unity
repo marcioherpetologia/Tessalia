@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 112378535}
   - component: {fileID: 112378537}
   - component: {fileID: 112378536}
+  - component: {fileID: 112378538}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -233,6 +234,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &112378538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112378534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4165e4eb276531c4a91199bf572cad70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimationTriggers
 --- !u!1 &480159436
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,9 +614,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 724192985}
-  - component: {fileID: 724192984}
   - component: {fileID: 724192986}
   - component: {fileID: 724192987}
+  - component: {fileID: 724192984}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -633,6 +646,10 @@ MonoBehaviour:
   wallSlideSlowMultiplier: 0.5
   inAirMoveMultiplier: 0.9
   wallJumpForce: {x: 6, y: 12}
+  dashDuration: 0.2
+  dashSpeed: 20
+  attackVelocity: {x: 3, y: 1.5}
+  attackVelocityDuration: 0.1
 --- !u!4 &724192985
 Transform:
   m_ObjectHideFlags: 0

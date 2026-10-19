@@ -15,5 +15,9 @@ public class PlayerGroundedState : EntityState // Esta classe ser√° uma combina√
         
         if (input.Player.Jump.WasPerformedThisFrame()) 
             stateMachine.ChangeState(player.jumpState);
+        
+        if(input.Player.Attack.WasPerformedThisFrame())
+            stateMachine.ChangeState(player.basicAttackState);
+            
     }
 }
