@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     public float dashSpeed = 20f;
     
     [Header("Attack Details")]
-    public Vector2 attackVelocity;
+    public Vector2[] attackVelocity;
     public float attackVelocityDuration;
     public float comboResetTime = 1;
     

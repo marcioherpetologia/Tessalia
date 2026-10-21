@@ -4,13 +4,16 @@ public class PlayerBasicAttackState : EntityState
 {
     private float attackVelocityTimer;
     
-    private int comboIndex = 1;
     private const int FistComboIndex = 1;
+    private int comboIndex = 1;
     private int comboLimit = 3;
+
+    private float lastTimeAttack;
     
     public PlayerBasicAttackState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
-        
+        if (comboLimit != player.attackVelocity.Length)
+            comboLimit = player.attackVelocity.Length;
     }
 
     public override void Update()
@@ -36,6 +39,7 @@ public class PlayerBasicAttackState : EntityState
     {
         base.Exit();
         comboIndex++;
+        lastTimeAttack += Time.time;
     }
 
     private void HandleAttackVelocity()
@@ -48,12 +52,17 @@ public class PlayerBasicAttackState : EntityState
 
     private void ApplyAttackVelocity()
     {
+        Vector2 attackVelocity = player.attackVelocity[comboIndex - 1];
+        
         attackVelocityTimer = player.attackVelocityDuration;
-        player.SetVelocity(player.attackVelocity.x * player.facingDir, player.attackVelocity.y);
+        player.SetVelocity(attackVelocity.x * player.facingDir, attackVelocity.y);
     }
     
     private void ResetComboIndex()
     {
+        if (Time.time > lastTimeAttack + player.comboResetTime)     
+            comboIndex = FistComboIndex;
+        
         if(comboIndex > comboLimit)
             comboIndex = FistComboIndex;
     }
