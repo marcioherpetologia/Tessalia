@@ -43,8 +43,7 @@ public class Player : MonoBehaviour
     [Header("Attack Details")]
     public Vector2 attackVelocity;
     public float attackVelocityDuration;
-    
-
+    public float comboResetTime = 1;
     
     private void Awake()
     {

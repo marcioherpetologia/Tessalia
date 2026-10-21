@@ -3,7 +3,10 @@ using UnityEngine;
 public class PlayerBasicAttackState : EntityState
 {
     private float attackVelocityTimer;
+    
     private int comboIndex = 1;
+    private const int FistComboIndex = 1;
+    private int comboLimit = 3;
     
     public PlayerBasicAttackState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
@@ -24,10 +27,11 @@ public class PlayerBasicAttackState : EntityState
     {
         base.Enter();
         
+        ResetComboIndex();
+        
         anim.SetInteger("basicAttackIndex", comboIndex);
         ApplyAttackVelocity();
     }
-
     public override void Exit()
     {
         base.Exit();
@@ -46,6 +50,12 @@ public class PlayerBasicAttackState : EntityState
     {
         attackVelocityTimer = player.attackVelocityDuration;
         player.SetVelocity(player.attackVelocity.x * player.facingDir, player.attackVelocity.y);
+    }
+    
+    private void ResetComboIndex()
+    {
+        if(comboIndex > comboLimit)
+            comboIndex = FistComboIndex;
     }
 
 }
