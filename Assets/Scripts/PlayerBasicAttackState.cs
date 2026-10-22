@@ -9,6 +9,7 @@ public class PlayerBasicAttackState : EntityState
     private int comboLimit = 3;
 
     private float lastTimeAttack;
+    private bool comboAttackQueued;
     
     public PlayerBasicAttackState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
@@ -21,14 +22,24 @@ public class PlayerBasicAttackState : EntityState
         base.Update();
         
         HandleAttackVelocity();
-        
-        if(triggerCalled)
-            stateMachine.ChangeState(player.idleState);
+
+        if (input.Player.Attack.WasPressedThisFrame())
+            comboAttackQueued = true;
+
+        if (triggerCalled)
+        {
+            if(comboAttackQueued)
+                stateMachine.ChangeState(player.basicAttackState);
+            else
+                stateMachine.ChangeState(player.idleState);
+        }
     }
 
     public override void Enter()
     {
         base.Enter();
+
+        comboAttackQueued = false;
         
         ResetComboIndex();
         
