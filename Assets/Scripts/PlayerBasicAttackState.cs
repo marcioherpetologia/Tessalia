@@ -5,6 +5,7 @@ public class PlayerBasicAttackState : EntityState
     private float attackVelocityTimer;
     
     private const int FistComboIndex = 1;
+    private int attackDir;
     private int comboIndex = 1;
     private int comboLimit = 3;
 
@@ -24,14 +25,11 @@ public class PlayerBasicAttackState : EntityState
         HandleAttackVelocity();
 
         if (input.Player.Attack.WasPressedThisFrame())
-            comboAttackQueued = true;
+            QueuedNextAttack();
 
         if (triggerCalled)
         {
-            if(comboAttackQueued)
-                stateMachine.ChangeState(player.basicAttackState);
-            else
-                stateMachine.ChangeState(player.idleState);
+            HandleStateExit();
         }
     }
 
@@ -42,6 +40,8 @@ public class PlayerBasicAttackState : EntityState
         comboAttackQueued = false;
         
         ResetComboIndex();
+
+        attackDir = player.moveInput.x != 0 ? attackDir = ((int)player.moveInput.x) : attackDir = player.facingDir;
         
         anim.SetInteger("basicAttackIndex", comboIndex);
         ApplyAttackVelocity();
@@ -51,6 +51,23 @@ public class PlayerBasicAttackState : EntityState
         base.Exit();
         comboIndex++;
         lastTimeAttack += Time.time;
+    }
+
+    private void HandleStateExit()
+    {
+        if (comboAttackQueued)
+        {
+            anim.SetBool(animBoolName, false);
+            player.EnterAttackStateWithDelay();
+        }
+        else
+            stateMachine.ChangeState(player.idleState);
+    }
+
+    private void QueuedNextAttack()
+    {
+        if(comboIndex < comboLimit)
+            comboAttackQueued = true;
     }
 
     private void HandleAttackVelocity()
@@ -66,7 +83,7 @@ public class PlayerBasicAttackState : EntityState
         Vector2 attackVelocity = player.attackVelocity[comboIndex - 1];
         
         attackVelocityTimer = player.attackVelocityDuration;
-        player.SetVelocity(attackVelocity.x * player.facingDir, attackVelocity.y);
+        player.SetVelocity(attackVelocity.x * attackDir, attackVelocity.y);
     }
     
     private void ResetComboIndex()

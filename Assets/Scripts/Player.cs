@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
     public Vector2[] attackVelocity;
     public float attackVelocityDuration;
     public float comboResetTime = 1;
+    private Coroutine queuedAttackCo;
     
     private void Awake()
     {
@@ -118,6 +120,20 @@ public class Player : MonoBehaviour
     {
         groundDetected = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
         wallDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
+    }
+
+    public void EnterAttackStateWithDelay()
+    {
+        if(queuedAttackCo != null)
+            StopCoroutine(EnterAttackStateWithDelayCo());
+
+        queuedAttackCo = StartCoroutine(EnterAttackStateWithDelayCo());
+    }
+
+    private IEnumerator EnterAttackStateWithDelayCo()
+    {
+        yield return new WaitForEndOfFrame();
+        stateMachine.ChangeState(basicAttackState);
     }
 
     private void OnDrawGizmos()
