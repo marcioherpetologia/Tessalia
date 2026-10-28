@@ -10,7 +10,7 @@ public class PlayerJumpState : PlayerAiredState
     {
         base.Update();
         
-        if(player.rb.linearVelocity.y < 0)
+        if(player.rb.linearVelocity.y < 0 && stateMachine.currentState != player.jumpAttackState)
             stateMachine.ChangeState(player.fallState);
     }
 

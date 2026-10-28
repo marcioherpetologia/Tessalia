@@ -13,6 +13,8 @@ public class PlayerJumpAttackState : EntityState
     {
         base.Enter();
         touchedGround = false;
+        
+        player.SetVelocity(player.jumpAttackVelocity.x * player.facingDir, player.jumpAttackVelocity.y);
     }
 
     public override void Update()
