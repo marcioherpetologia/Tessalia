@@ -15,12 +15,19 @@ public class ParallaxBackground : MonoBehaviour
         mainCamera = Camera.main;
         cameraHalfWidth = mainCamera.orthographicSize * mainCamera.aspect; // multiplicamos a metade da altura pelo aspecto da tela para descobrir a metade da largura visível pela câmera.
         
-        CalculateImageLenght();
+        InitializeLayers();
+    }
+
+    private void Start()
+    {
+        if(Camera.main != null)
+            lastCameraPositionX = Camera.main.transform.position.x;
     }
 
     private void Update()
     {
         float currentCameraPositionX = mainCamera.transform.position.x;
+        
         float distanceToMove = currentCameraPositionX - lastCameraPositionX;
         lastCameraPositionX = currentCameraPositionX;
         
@@ -34,7 +41,7 @@ public class ParallaxBackground : MonoBehaviour
         }
     }
 
-    private void CalculateImageLenght()
+    private void InitializeLayers()
     {
         foreach (ParallaxLayer layer in backgroundLayers)
         {
