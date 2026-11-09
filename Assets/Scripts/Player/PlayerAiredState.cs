@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAiredState : EntityState // SuperState no qual programaremos tudo que acontecerá no ar
+public class PlayerAiredState : PlayerState // SuperState no qual programaremos tudo que acontecerá no ar
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public PlayerAiredState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
