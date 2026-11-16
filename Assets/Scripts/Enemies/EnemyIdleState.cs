@@ -9,7 +9,8 @@ public class EnemyIdleState : EnemyState
     public override void Enter()
     {
         base.Enter();
-
+        
+        enemy.SetVelocity(0,0);
         stateTimer = enemy.idleTime;
     }
 
