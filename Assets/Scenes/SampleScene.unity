@@ -1032,7 +1032,7 @@ GameObject:
   - component: {fileID: 724192986}
   - component: {fileID: 724192987}
   - component: {fileID: 724192984}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1320,7 +1320,7 @@ GameObject:
   - component: {fileID: 1147353250}
   - component: {fileID: 1147353249}
   - component: {fileID: 1147353247}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemySkeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1350,6 +1350,11 @@ MonoBehaviour:
   idleTime: 2
   moveSpeed: 1.2
   moveAnimSpeedMultiplier: 1
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 128
+  playerCheck: {fileID: 1147353248}
+  playerCheckDistance: 10
 --- !u!4 &1147353248
 Transform:
   m_ObjectHideFlags: 0

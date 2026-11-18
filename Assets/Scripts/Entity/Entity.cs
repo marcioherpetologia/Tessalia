@@ -12,9 +12,9 @@ public class Entity : MonoBehaviour
     public int facingDir { get; private set; } = 1;
     
     [Header("Collision Detection")]
+    [SerializeField] protected LayerMask whatIsGround;
     [SerializeField] private float wallCheckDistance;
     [SerializeField] private float groundCheckDistance;
-    [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private Transform primaryWallCheck;
     [SerializeField] private Transform secondaryWallCheck;
     [SerializeField] private Transform groundCheck;
@@ -84,7 +84,7 @@ public class Entity : MonoBehaviour
     }
 
 
-    private void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(groundCheck.position, groundCheck.position + new Vector3(0, -groundCheckDistance));
