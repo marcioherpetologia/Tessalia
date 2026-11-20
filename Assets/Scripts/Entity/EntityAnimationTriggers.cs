@@ -7,11 +7,12 @@ public class EntityAnimationTriggers : MonoBehaviour
 
     private void Awake()
     {
-        entity = GetComponentInParent<Player>();
+        entity = GetComponentInParent<Entity>();
     }
 
     private void CurrentStateTrigger()
     {
         entity.CallAnimationTrigger();
+        print("chamou");
     }
 }

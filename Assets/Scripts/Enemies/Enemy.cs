@@ -16,6 +16,12 @@ public class Enemy : Entity
     [SerializeField] private LayerMask whatIsPlayer;
     [SerializeField] private Transform playerCheck;
     [SerializeField] private float playerCheckDistance;
+    
+    [Header("Battle Details")]
+    public float battleMoveSpeed = 3.0f;
+    public float attackDistance = 2.0f;
+    
+    
 
     public RaycastHit2D PlayerDetection()
     {
@@ -33,6 +39,8 @@ public class Enemy : Entity
         
         Gizmos.color = Color.red;
         Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + (facingDir * playerCheckDistance), playerCheck.position.y));
+        Gizmos.color = Color.coral;
+        Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + (facingDir * attackDistance), playerCheck.position.y));
     }
 
 }

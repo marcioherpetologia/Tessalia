@@ -692,7 +692,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.032914, y: -0.8813145, z: -10}
+  m_LocalPosition: {x: -7.2778025, y: -0.88130975, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -994,7 +994,7 @@ Transform:
   m_GameObject: {fileID: 634278677}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.7678, y: -0.88130975, z: -10}
+  m_LocalPosition: {x: -7.2778, y: -0.88130975, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1051,11 +1051,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fade239398b4da84eab8437da231d4f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  wallCheckDistance: 0.4
-  groundCheckDistance: 1.35
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  wallCheckDistance: 0.4
+  groundCheckDistance: 1.35
   primaryWallCheck: {fileID: 508469751}
   secondaryWallCheck: {fileID: 138839078}
   groundCheck: {fileID: 724192985}
@@ -1082,7 +1082,7 @@ Transform:
   m_GameObject: {fileID: 724192982}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.43, y: -0.73, z: 0}
+  m_LocalPosition: {x: 6.06, y: -0.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1339,11 +1339,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec311149551c1143827e04e80ea3b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySkeleton
-  wallCheckDistance: 0.79
-  groundCheckDistance: 1.39
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  wallCheckDistance: 0.79
+  groundCheckDistance: 1.39
   primaryWallCheck: {fileID: 1147353248}
   secondaryWallCheck: {fileID: 788753497}
   groundCheck: {fileID: 1010833767}
@@ -1355,6 +1355,8 @@ MonoBehaviour:
     m_Bits: 128
   playerCheck: {fileID: 1147353248}
   playerCheckDistance: 10
+  battleMoveSpeed: 3
+  attackDistance: 2
 --- !u!4 &1147353248
 Transform:
   m_ObjectHideFlags: 0
@@ -1364,7 +1366,7 @@ Transform:
   m_GameObject: {fileID: 1147353246}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.15, y: -0.7, z: 0}
+  m_LocalPosition: {x: -8.06, y: -0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
