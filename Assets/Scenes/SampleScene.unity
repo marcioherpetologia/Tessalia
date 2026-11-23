@@ -1357,6 +1357,9 @@ MonoBehaviour:
   playerCheckDistance: 10
   battleMoveSpeed: 3
   attackDistance: 2
+  battleTimeDuration: 5
+  minRetreadDistance: 1.65
+  retreadVelocity: {x: 2, y: 2}
 --- !u!4 &1147353248
 Transform:
   m_ObjectHideFlags: 0

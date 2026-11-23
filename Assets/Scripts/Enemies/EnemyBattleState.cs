@@ -4,6 +4,8 @@ public class EnemyBattleState : EnemyState
 {
 
     private Transform player;
+
+    private float lastTimeWasInBattle;
     
     public EnemyBattleState(Enemy enemy, StateMachine stateMachine, string animBoolName) : base(enemy, stateMachine, animBoolName)
     {
@@ -14,14 +16,26 @@ public class EnemyBattleState : EnemyState
         base.Enter();
         
         if(player == null)
-            player = enemy.PlayerDetection().transform;
+            player = enemy.PlayerDetected().transform;
+
+        if (ShouldRetread())
+        {
+            rb.linearVelocity = new Vector2(enemy.retreadVelocity.x * -DirectionToPlayer(),  enemy.retreadVelocity.y);
+            enemy.HandleFlip(DirectionToPlayer());
+        }
     }
 
     public override void Update()
     {
         base.Update();
         
-        if(WithInAttackRange())
+        if(enemy.PlayerDetected())
+            lastTimeWasInBattle = Time.time;
+        
+        if(BattleTimeIsOver())
+            stateMachine.ChangeState(enemy.idleState);
+        
+        if(WithInAttackRange() && enemy.PlayerDetected())
             stateMachine.ChangeState(enemy.attackState);
         else
         {
@@ -29,6 +43,13 @@ public class EnemyBattleState : EnemyState
         }
         
     }
+    
+    private void UpdateTimeInBattle() => lastTimeWasInBattle = Time.time;
+    
+    private bool BattleTimeIsOver() => Time.time > lastTimeWasInBattle + enemy.battleTimeDuration;
+    
+    private bool ShouldRetread() => DistanceToPlayer() < enemy.minRetreadDistance;
+    
 
     private bool WithInAttackRange() => DistanceToPlayer() < enemy.attackDistance;
 
