@@ -21,6 +21,8 @@ public abstract class EntityState
     public virtual void Update() // Fazer o override no Player
     {
         stateTimer -=  Time.deltaTime;
+        
+        UpdateAnimationParameters();
     }
         
     public virtual void Enter() // Chamado todas as vezes que precisar entrar em novo state
@@ -37,6 +39,11 @@ public abstract class EntityState
     public void CallAnimationTrigger()
     {
         triggerCalled = true;
+    }
+        
+    public virtual void UpdateAnimationParameters()
+    {
+        
     }
 
 }

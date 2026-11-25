@@ -42,7 +42,7 @@ public class Entity : MonoBehaviour
         stateMachine.UpdateActiveState();
     }
 
-    public void CallAnimationTrigger()
+    public void CurrentStateAnimationTrigger()
     {
         stateMachine.currentState.CallAnimationTrigger();
     }
@@ -93,4 +93,5 @@ public class Entity : MonoBehaviour
         if(secondaryWallCheck != null)
             Gizmos.DrawLine(secondaryWallCheck.position, secondaryWallCheck.position + new Vector3(wallCheckDistance * facingDir, 0));
     }
+
 }
