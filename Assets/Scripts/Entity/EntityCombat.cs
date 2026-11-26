@@ -21,7 +21,7 @@ public class EntityCombat : MonoBehaviour
         foreach (var target in GetDetectionColliders())
         {
             EntityHealth targetHealth = target.GetComponent<EntityHealth>();
-            targetHealth?.TakeDamage(damage);
+            targetHealth?.TakeDamage(damage,transform);
         }
     }
     

@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyBattleState : EnemyState
 {
 
-    private Transform player;
+    public Transform player;
 
     private float lastTimeWasInBattle;
     
@@ -15,8 +15,12 @@ public class EnemyBattleState : EnemyState
     {
         base.Enter();
         
-        if(player == null)
-            player = enemy.PlayerDetected().transform;
+        UpdateTimeInBattle();
+
+        player ??= player = enemy.GetPlayerReference(); // mesma semantica do if abaixo
+        
+        //if (player == null)
+            //player = enemy.GetPlayerReference();
 
         if (ShouldRetread())
         {
